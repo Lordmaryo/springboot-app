@@ -1,7 +1,12 @@
 package com.Lordmaryo;
 
+import com.Lordmaryo.activities.BankDetails;
+import com.Lordmaryo.activities.Customer;
+import com.Lordmaryo.activities.FullPerson;
+import com.Lordmaryo.activities.Person;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +17,12 @@ import java.util.List;
 @RestController
 public class Main {
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        var ctx = SpringApplication.run(Main.class, args);
+
+        FullPerson fullPerson = ctx.getBean("fullPerson", FullPerson.class);
+        Customer customer = ctx.getBean("customer", Customer.class);
+        System.out.println(fullPerson);
+        System.out.println(customer);
     }
 
     //API
@@ -24,18 +34,6 @@ public class Main {
         BankDetails bankDetails = new BankDetails(120_000, "Lord maryo",
                 LocalDate.of(2020, 9, 10));
 
-        FullPerson response = new FullPerson(person, bankDetails);
-        return response;
-    }
-
-    record Person(String name,
-                  int age,
-                  List<String> favProgrammingLang) {
-    }
-
-    record BankDetails(double savings, String accountName, LocalDate dateOfAccount) {
-    }
-
-    record FullPerson(Person person, BankDetails bankDetails) {
+        return new FullPerson(person, bankDetails);
     }
 }

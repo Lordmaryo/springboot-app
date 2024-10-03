@@ -1,4 +1,4 @@
-package com.Lordmaryo;
+package com.Lordmaryo.activities;
 
 import java.util.Objects;
 
@@ -7,9 +7,9 @@ public class Customer {
     private String name;
     private String email;
     private String address;
-    private String age;
+    private int age;
 
-    public Customer(Integer id, String name, String email, String address, String age) {
+    public Customer(Integer id, String name, String email, String address, int age) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -54,17 +54,16 @@ public class Customer {
         this.address = address;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
